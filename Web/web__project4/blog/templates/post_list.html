@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div id="navbar">
+            <span>pylog</span>
+            <a href="/posts/add/" class="btn btn-primary">글 작성</a>
+        </div>
+        <div id="post-list">
+            <ul class="posts">
+                <!-- for 로 순회하면서 각각의 글을 표시 -->
+                {% for post in posts %}
+                    <li class="post">
+                        <!-- 각각의 제목과 내용을 나누어 표시 -->
+                        <h2><a href="/posts/{{ post.id }}/">{{ post.title }}</a></h2>
+
+                        <p>{{ post.content }}</p>
+                        <!-- post와 연결된 모든 comment QuerySet -->
+                        <ul class="comments">
+                            {% for comment in post.comment_set.all %}
+                                <li class="comment">{{ comment.content }}</li>
+                            {% empty %} <!-- post.comment_set.all 에 순회할 항목이 없는 경우 -->
+                                <li class="comment-empty">아직 댓글이 없습니다</li>
+                            {% endfor %}
+                        </ul>
+                        {% if post.thumbnail %}
+                            <img src="{{ post.thumbnail.url }}" alt="">    
+                        {% else %}
+                            <img src="" alt="">
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

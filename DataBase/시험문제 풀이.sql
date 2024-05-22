@@ -1,0 +1,147 @@
+-- 1. 다음은 식품공장의 정보를 담은 FOOD_FACTORY 테이블이다
+
+-- FOOD_FACTORY의 컬럼 구성은 다음과 같다
+
+-- 컬럼명	타입	NULL허용 여부	의미
+-- FACTORY_ID	VARCHAR(10)	FALSE	공장 ID
+-- FACTORY_NAME	VARCHAR(50)	FALSE	공장 이름
+-- ADDRESS	VARCHAR(100)	FALSE	주소
+-- TLNO	VARCHAR(20)	TRUE	전화번호
+
+DROP TABLE IF EXISTS FOOD_FACTORY;
+USE naver_db;
+CREATE TABLE FOOD_FACTORY
+(FACTORY_ID		INT	AUTO_INCREMENT NOT NULL PRIMARY KEY,
+ FACTORY_NAME	VARCHAR(20)	NOT NULL,
+ ADDRESS		VARCHAR(100) NULL,
+ TLNO			VARCHAR(20)	NULL
+);
+
+SELECT * FROM FOOD_FACTORY;
+
+INSERT INTO FOOD_FACTORY VALUES (19980003,'(주)맛있는라면','강원도 정선군 남면 칠현로 679',	033-431-3122);
+INSERT INTO FOOD_FACTORY VALUES (19980004,'(주)맛있는기름','경기도 평택시 포승읍 포승공단순환로',	031-651-2410);
+INSERT INTO FOOD_FACTORY VALUES (20010001,'(주)맛있는소스','경상북도 구미시 1공단로7길 58-11',	054-231-2121);
+INSERT INTO FOOD_FACTORY VALUES (20010002,'(주)맛있는통조림','전라남도 영암군 미암면 곤미현로 1336',061-341-5210);
+INSERT INTO FOOD_FACTORY VALUES (20100001,'(주)맛있는차','전라남도 장성군 서삼면 장산리 233-1번지',	061-661-1420);
+INSERT INTO FOOD_FACTORY VALUES (20100002,'(주)맛있는김치','충청남도 아산시 탕정면 탕정면로 485',	041-241-5421);
+INSERT INTO FOOD_FACTORY VALUES (20100003,'(주)맛있는음료','강원도 원주시 문막읍 문막공단길 154',	033-232-7630);
+INSERT INTO FOOD_FACTORY VALUES (20100004,'(주)맛있는국','강원도 평창군 봉평면 진조길 227-35',	033-323-6640);
+INSERT INTO FOOD_FACTORY VALUES (20110001,'(주)맛있는밥','경기도 화성시 팔탄면 가재리',	031-661-1532);
+INSERT INTO FOOD_FACTORY VALUES (20110002,'(주)맛있는과자','광주광역시 북구 하서로 222',	062-211-7759);
+
+-- FOOD_FACTORY 테이블에서 강원도에 위치한 식품공장의 공장 ID, 공장 이름, 주소를 조회하는 SQL문을 작성하시오
+-- 이때 결과는 공장 ID 를 기준으로 오름차순으로 정렬하시오
+SELECT FACTORY_ID, FACTORY_NAME, ADDRESS
+FROM FOOD_FACTORY
+WHERE ADDRESS LIKE '강원도%'
+ORDER BY FACTORY_ID ASC;
+ 
+-- FOOD_FACTORY 테이블은 아래와 같다
+
+-- FACTORY_ID	FACTORY_NAME	ADDRESS	TLNO
+-- FT19980003	(주)맛있는라면	강원도 정선군 남면 칠현로 679	033-431-3122
+-- FT19980004	(주)맛있는기름	경기도 평택시 포승읍 포승공단순환로 245	031-651-2410
+-- FT20010001	(주)맛있는소스	경상북도 구미시 1공단로7길 58-11	054-231-2121
+-- FT20010002	(주)맛있는통조림	전라남도 영암군 미암면 곤미현로 1336	061-341-5210
+-- FT20100001	(주)맛있는차	전라남도 장성군 서삼면 장산리 233-1번지	061-661-1420
+-- FT20100002	(주)맛있는김치	충청남도 아산시 탕정면 탕정면로 485	041-241-5421
+-- FT20100003	(주)맛있는음료	강원도 원주시 문막읍 문막공단길 154	033-232-7630
+-- FT20100004	(주)맛있는국	강원도 평창군 봉평면 진조길 227-35	033-323-6640
+-- FT20110001	(주)맛있는밥	경기도 화성시 팔탄면 가재리 34번지	031-661-1532
+-- FT20110002	(주)맛있는과자	광주광역시 북구 하서로 222	062-211-7759
+ 
+
+-- SQL을 실행하면 다음과 같이 출력되어야 함
+
+-- FACTORY_ID	FACTORY_NAME	ADDRESS
+-- FT19980003	(주)맛있는라면	강원도 정선군 남면 칠현로 679
+-- FT20100003	(주)맛있는음료	강원도 원주시 문막읍 문막공단길 154
+-- FT20100004	(주)맛있는국	강원도 평창군 봉평면 진조길 227-35
+
+-- 2. 다음은 어느 의류 쇼핑몰에서 판매 중인 상품들의 정보를 담은 PRODUCT 테이블이다
+
+-- PRODUCT 테이블은 아래와 같은 구조로 되어 있다
+
+CREATE TABLE PRODUCT (
+  PRODUCT_ID INTEGER NOT NULL,
+  PRODUCT_CODE VARCHAR(8) NOT NULL,
+  PRICE INTEGER NOT NULL,
+  PRIMARY KEY (PRODUCT_ID)
+);
+
+SELECT * FROM PRODUCT p;
+INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_CODE, PRICE) VALUES (1, 'A1000001', 10000);
+INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_CODE, PRICE) VALUES (2, 'A2000005', 9000);
+INSERT INTO PRODUCT (PRODUCT_ID, PRODUCT_CODE, PRICE) VALUES (3, 'C1000006', 22000);
+
+Column name	Type	Nullable	의미
+PRODUCT_ID	INTEGER	FALSE	상품 ID
+PRODUCT_CODE	VARCHAR(8)	FALSE	상품코드
+PRICE	INTEGER	FALSE	판매가
+PRODUCT 테이블에서 판매 중인 상품 중 가장 높은 판매가를 출력하는 SQL문을 작성하시오
+
+-- 이때 컬럼명은 MAX_PRICE로 지정하시오
+SELECT MAX(PRICE) MAX_PRICE
+FROM PRODUCT;
+
+SELECT PRICE AS MAX_PRICE
+FROM PRODUCT
+ORDER BY PRICE DESC
+LIMIT 1;
+
+-- 예를 들어 PRODUCT 테이블이 다음과 같다면
+
+-- PRODUCT_ID	PRODUCT_CODE	PRICE
+-- 1	A1000001	10000
+-- 2	A2000005	9000
+-- 3	C1000006	22000
+-- 가장 높은 판매가는 22,000 원 이므로, 다음과 같은 결과가 나와야 한다.
+
+-- MAX_PRICE
+-- 22000
+
+-- 다음은 어느 의류 쇼핑몰에 가입한 회원 정보를 담은 USER_INFO 테이블이다.
+
+-- USER_INFO 테이블은 아래와 같은 구조로 되어있다.
+
+Column name	Type	Nullable	의미
+USER_ID	INTEGER	NOT NULL	회원 ID
+GENDER	TINYINT(1)	TRUE	성별
+AGE	INTEGER	TRUE	나이
+JOINED	DATE	FALSE	가입일
+-- GENDER 컬럼은 비어있거나 0 또는 1의 값을 가지며 0인 경우 남자를, 1인 경우는 여자를 나타낸다.
+
+-- USER_INFO 테이블에서 나이 정보가 없는 회원이 몇 명인지 출력하는 SQL문을 작성하시오
+
+-- 이때 컬럼명은 USERS로 지정하시오
+
+-- 예를 들어 USER_INFO 테이블이 다음과 같다면
+
+-- USER_ID	GENDER	AGE	JOINED
+-- 1	     1		26	2021-06-01
+-- 2	   NULL	  NULL	2021-07-25
+-- 3	     1	  NULL	2021-07-30
+-- 4	     0	    31	2021-08-03
+
+-- 나이 정보가 없는 회원은 2명 이므로, 다음과 같은 결과가 나와야 한다
+
+-- USERS
+-- 2
+DROP TABLE USER_INFO;
+
+CREATE TABLE USER_INFO 
+(USER_ID INTEGER NOT NULL,
+ GENDER TINYINT(1) NULL,
+ AGE INTEGER NULL,
+ JOINED DATE NOT NULL
+);
+
+INSERT INTO USER_INFO VALUES (1, 1, 26, '2021-06-01');
+INSERT INTO USER_INFO VALUES (2, NULL, NULL, '2021-07-25');
+INSERT INTO USER_INFO VALUES (3, 1, NULL, '2021-07-30');
+INSERT INTO USER_INFO VALUES (4, 0, 31, '2021-08-03');
+
+SELECT COUNT(*) AS USERS
+FROM USER_INFO
+WHERE AGE IS NULL;

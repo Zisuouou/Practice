@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <body>
+        <h1>Blog</h1>
+        {% for post in posts %}
+            <hr />
+            <a href="{%url 'blog:single_post' pk=post.pk %}"><h2>{{ post.title }}</h2></a>
+            <h4>{{ post.crated_at }}</h4>
+            <p>{{ post.content }}</p>
+        {% endfor %}
+    </body>
+</html>

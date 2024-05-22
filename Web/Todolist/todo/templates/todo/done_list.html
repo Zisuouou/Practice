@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'style.css' %}">    
+    <title>Todo 목록 앱</title>
+</head>
+<body>
+    <div class ="container">
+        <h1>완료 목록</h1>
+        <p>
+            <a href="{% url 'todo_list' %}" class="btn btn-primary"><i class="bi bi-house-door"></i>홈으로</a>
+        </p>
+        <ol class="list-group list-group-numbered">
+            {% for done in dones %}
+            <li class="list-group-item">
+                <a href="{% url 'todo_detail' pk=done.pk %}">{{done.title}}</a>
+                {% if done.important %}
+                <span class="badge badge-danger">!</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</body>
+</html>

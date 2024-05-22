@@ -1,0 +1,54 @@
+h1 {
+    color: #FCA205;
+}
+
+header {
+  width: 80%;
+  margin: 20px auto;
+  background-color: rgb(236, 184, 255);
+  border-radius: 10px;
+}
+
+.container {
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgb(236, 184, 255);
+  text-align: center;
+}
+
+.list-group {
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgb(200, 176, 209);
+  text-align: center;
+}
+
+.list-group-numbered{
+  width: 200px;
+  background-color: #FCA205
+}
+
+.post__container .card-text {
+  width: 200px;
+  height: 50px;
+  overflow-y: auto;
+}
+
+.done_list__container {
+  flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1rem;
+  flex-direction: row;
+}
+
+.post__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+  padding: 30px;
+}
